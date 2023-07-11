@@ -4,17 +4,118 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>proyecto coder js</title>
-    
-
+    <link rel="stylesheet" href="guarderia.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>Guarderia</title>
 </head>
 <body>
- 
-        <h1>Camionetas disponibles</h1>
-        <button onclick="obtenerInformacionAuto()"> Click aqui para obtener mas Información</button>
-        <div id="informacion-auto"></div>
-    
-    <script src="javascript.js"></script>
+   
+  <nav>
+    <ul>
+      <li><a href="#">Inicio</a></li>
+      <li><a href="#">Servicios</a></li>
+      <li><a href="#">Productos</a></li>
+      <li><a href="#">Contacto</a></li>
+    </ul>
+  </nav>
 
+  <main>
+
+    <h1 class="text-center fw-bold p-3">Guarderia pinamar</h1>
+    <p class="text-center fs-3">  Alquilamos cuatriciclos, motos, utv y smal</p>
+
+    <div>
+      <h1>Guarderia Roman</h1>
+      <button onclick="obtenerInformacionAuto()"> Click aqui para obtener mas Información</button>
+      <div id="informacion-auto"></div>
+      
+  </div>
+    <div class="container">
+      <h2 class="text-center">Alquileres de motos,cuatriciclos</h2>
+      <div class="row">
+        <div class="col-sm-6 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src="./yamaha bashe.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card 1</h5>
+              <p class="card-text">Valor por hora: $2000</p>
+              <label for="horas1">Seleccionar horas:</label>
+              <select id="horas1">
+                <option value="1">1 hora</option>
+                <option value="2">2 horas</option>
+                <option value="3">3 horas</option>
+                <option value="4">4 horas</option>
+              </select>
+              <p id="resultado1"></p>
+              <button class="btn btn-primary" onclick="calcularPrecioPorHora('horas1', 'resultado1')">Calcular</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-sm-6 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src="./yamaha 450.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card 2</h5>
+              <p class="card-text">Valor por hora: $2000</p>
+              <label for="horas2">Seleccionar horas:</label>
+              <select id="horas2">
+                <option value="1">1 hora</option>
+                <option value="2">2 horas</option>
+                <option value="3">3 horas</option>
+                <option value="4">4 horas</option>
+              </select>
+              <p id="resultado2"></p>
+              <button class="btn btn-primary" onclick="calcularPrecioPorHora('horas2', 'resultado2')">Calcular</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-sm-6 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src="./hondatornado.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card 3</h5>
+              <p class="card-text">Valor por hora: $2000</p>
+              <label for="horas3">Seleccionar horas:</label>
+              <select id="horas3">
+                <option value="1">1 hora</option>
+                <option value="2">2 horas</option>
+                <option value="3">3 horas</option>
+                <option value="4">4 horas</option>
+              </select>
+              <p id="resultado3"></p>
+              <button class="btn btn-primary" onclick="calcularPrecioPorHora('horas3', 'resultado3')">Calcular</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-sm-6 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src="./blasteryama.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card 4</h5>
+              <p class="card-text">Valor por hora: $2000</p>
+              <label for="horas4">Seleccionar horas:</label>
+              <select id="horas4">
+                <option value="1">1 hora</option>
+                <option value="2">2 horas</option>
+                <option value="3">3 horas</option>
+                <option value="4">4 horas</option>
+              </select>
+              <p id="resultado4"></p>
+              <button class="btn btn-primary" onclick="calcularPrecioPorHora('horas4', 'resultado4')">Calcular</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </main>
+
+   
+      
+      
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="guarderia.js"></script>
 </body>
 </html>
