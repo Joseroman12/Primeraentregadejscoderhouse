@@ -54,3 +54,75 @@ function calcularPrecioPorHora(horasId, resultadoId) {
 
   resultado.innerHTML = "El precio total es: $" + precioTotal;
 }
+
+
+
+const marcaSelect = document.getElementById('marca');
+const modeloInput = document.getElementById('modelo');
+const horasInput = document.getElementById('horas');
+const carritoLista = document.getElementById('carrito');
+const totalDiv = document.getElementById('total');
+
+//elija del 1 al 4 para obtener los modelos
+const cuatriciclos = [
+  { marca: 'Yamaha', modelo: '1', precioHora: 2000 },
+  { marca: 'Honda', modelo: '2', precioHora: 3000 },
+  { marca: 'Kawasaki', modelo: '3', precioHora: 2000 },
+  { marca: 'Suzuki', modelo: '4', precioHora: 2000 }
+];
+
+
+let carrito = [];
+
+
+function mostrarCarrito() {
+  carritoLista.innerHTML = '';
+  totalDiv.textContent = '';
+
+  carrito.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = `Cuatriciclo: ${item.marca} ${item.modelo}, Horas: ${item.horas}, Precio por Hora: $${item.precioHora}, Total: $${item.total}`;
+    carritoLista.appendChild(li);
+  });
+
+ 
+  const total = carrito.reduce((acc, item) => acc + item.total, 0);
+  totalDiv.textContent = `Total del Alquiler: $${total}`;
+}
+
+
+function agregarAlCarrito() {
+  const marca = marcaSelect.value;
+  const modelo = modeloInput.value;
+  const horas = parseInt(horasInput.value);
+
+ 
+  const cuatricicloSeleccionado = cuatriciclos.find(cuatriciclo => cuatriciclo.marca === marca && cuatriciclo.modelo === modelo);
+
+  if (cuatricicloSeleccionado && horas > 0) {
+  
+    const total = cuatricicloSeleccionado.precioHora * horas;
+
+
+    carrito.push({
+      marca: cuatricicloSeleccionado.marca,
+      modelo: cuatricicloSeleccionado.modelo,
+      horas: horas,
+      precioHora: cuatricicloSeleccionado.precioHora,
+      total: total
+    });
+
+   
+    mostrarCarrito();
+    limpiarInputs();
+  }
+}
+
+
+function limpiarInputs() {
+  modeloInput.value = '';
+  horasInput.value = '';
+}
+
+
+mostrarCarrito();

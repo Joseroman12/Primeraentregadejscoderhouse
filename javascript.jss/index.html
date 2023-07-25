@@ -107,7 +107,29 @@
               <button class="btn btn-primary" onclick="calcularPrecioPorHora('horas4', 'resultado4')">Calcular</button>
             </div>
           </div>
-        </div>
+        </div>  
+
+
+
+  <div>
+    <h2>Calcula los precios por hora</h2>
+    <label for="marca">Marca:</label>
+    <select id="marca">
+      <option value="Yamaha">Yamaha</option>
+      <option value="Honda">Honda</option>
+      <option value="Kawasaki">Kawasaki</option>
+      <option value="Suzuki">Suzuki</option>
+    </select>
+    <label for="modelo">Modelo:</label>
+    <input type="text" id="modelo">
+    <label for="horas">Horas:</label>
+    <input type="number" id="horas">
+    <button onclick="agregarAlCarrito()">Agregar al Carrito</button>
+  </div>
+  <ul id="carrito"></ul>
+  <div id="total"></div>
+
+
       </div>
   </main>
 
