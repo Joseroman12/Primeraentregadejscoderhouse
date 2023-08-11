@@ -46,7 +46,8 @@ obtenerInformacionAuto()
 
 
 
-function calcularPrecioPorHora(horasId, resultadoId) {
+
+async function calcularPrecioPorHora(horasId, resultadoId) {
   var horas = parseInt(document.getElementById(horasId).value);
   var resultado = document.getElementById(resultadoId);
   var precioPorHora = 2000;
@@ -55,27 +56,16 @@ function calcularPrecioPorHora(horasId, resultadoId) {
   resultado.innerHTML = "El precio total es: $" + precioTotal;
 }
 
-
-
 const marcaSelect = document.getElementById('marca');
 const modeloInput = document.getElementById('modelo');
 const horasInput = document.getElementById('horas');
 const carritoLista = document.getElementById('carrito');
 const totalDiv = document.getElementById('total');
 
-//elija del 1 al 4 para obtener los modelos
-const cuatriciclos = [
-  { marca: 'Yamaha', modelo: '1', precioHora: 2000 },
-  { marca: 'Honda', modelo: '2', precioHora: 3000 },
-  { marca: 'Kawasaki', modelo: '3', precioHora: 2000 },
-  { marca: 'Suzuki', modelo: '4', precioHora: 2000 }
-];
-
-
 let carrito = [];
+let cuatriciclos = [];
 
-
-function mostrarCarrito() {
+async function mostrarCarrito() {
   carritoLista.innerHTML = '';
   totalDiv.textContent = '';
 
@@ -85,24 +75,19 @@ function mostrarCarrito() {
     carritoLista.appendChild(li);
   });
 
- 
   const total = carrito.reduce((acc, item) => acc + item.total, 0);
   totalDiv.textContent = `Total del Alquiler: $${total}`;
 }
 
-
-function agregarAlCarrito() {
+async function agregarAlCarrito() {
   const marca = marcaSelect.value;
   const modelo = modeloInput.value;
   const horas = parseInt(horasInput.value);
 
- 
   const cuatricicloSeleccionado = cuatriciclos.find(cuatriciclo => cuatriciclo.marca === marca && cuatriciclo.modelo === modelo);
 
   if (cuatricicloSeleccionado && horas > 0) {
-  
     const total = cuatricicloSeleccionado.precioHora * horas;
-
 
     carrito.push({
       marca: cuatricicloSeleccionado.marca,
@@ -112,17 +97,85 @@ function agregarAlCarrito() {
       total: total
     });
 
-   
-    mostrarCarrito();
+    await mostrarCarrito();
     limpiarInputs();
   }
 }
-
 
 function limpiarInputs() {
   modeloInput.value = '';
   horasInput.value = '';
 }
 
+async function cargarCarrito() {
+  try {
+    const response = await fetch('cuatriciclos.json');
+    cuatriciclos = await response.json();
+    mostrarCarrito();
+  } catch (error) {
+    console.error('Error al cargar los cuatriciclos:', error);
+  }
+}
 
-mostrarCarrito();
+cargarCarrito();
+
+
+
+
+
+
+
+
+
+
+const cart = document.getElementById("cart");
+
+let Cuatriciclos = [];
+
+async function fetchCuatriciclos() {
+    try {
+        const response = await fetch("cuatriciclos.json");
+        Cuatriciclos = await response.json();
+        displayCart();
+    } catch (error) {
+        console.error("Error fetching cuatriciclos:", error);
+    }
+}
+
+function displayCart() {
+    cart.innerHTML = "";
+    Cuatriciclos.forEach(cuatriciclo => {
+        const item = document.createElement("div");
+        item.innerHTML = `
+            <p>Marca: ${cuatriciclo.marca}</p>
+            <p>Precio por Hora: $2000</p>
+            <label for="hours">Horas:</label>
+            <select id="hours-${cuatriciclo.id}">
+                <option value="1">1 Hora</option>
+                <option value="2">2 Horas</option>
+                <option value="3">3 Horas</option>
+                <option value="4">4 Horas</option>
+                <option value="5">5 Horas</option>
+            </select>
+            <button onclick="addToCart(${cuatriciclo.id})">Agregar al carrito</button>
+        `;
+        cart.appendChild(item);
+    });
+}
+
+function addToCart(id) {
+    const selectedCuatriciclo = Cuatriciclos.find(cuatriciclo => cuatriciclo.id === id);
+    if (selectedCuatriciclo) {
+        const hoursSelect = document.getElementById(`hours-${selectedCuatriciclo.id}`);
+        const selectedHours = parseInt(hoursSelect.value);
+        const totalPrice = selectedHours * 2000;
+        selectedCuatriciclo.inCart = true;
+        selectedCuatriciclo.hours = selectedHours;
+        selectedCuatriciclo.totalPrice = totalPrice;
+        displayCart();
+    }
+}
+
+// Cargar los datos iniciales y mostrar el carrito
+fetchCuatriciclos();
+

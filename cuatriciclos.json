@@ -1,0 +1,6 @@
+[
+  { "id": 1, "marca": "Yamaha", "inCart": false },
+  { "id": 2, "marca": "Honda", "inCart": false },
+  { "id": 3, "marca": "Kawasaki", "inCart": false },
+  { "id": 4, "marca": "Suzuki", "inCart": false }
+]
